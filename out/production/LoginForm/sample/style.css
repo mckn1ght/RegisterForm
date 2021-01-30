@@ -1,0 +1,11 @@
+#passwordField{
+   -fx-background-color: red;
+    border-radius: 4px;
+
+}
+
+#confirmPasswordField{
+   -fx-background-color: red;
+    border-radius: 4px;
+
+}
