@@ -1,5 +1,5 @@
 package sample;
-////testSS
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -38,7 +38,10 @@ public class Controller {
     @FXML
     Button quitButton;
 
+    boolean clean;
+
     public void checkEntry() {
+        clean = true;
         Pattern specialCharacters = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Pattern onlyLetters = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE);
         Pattern onlyNumbers = Pattern.compile("[^0-9]");
@@ -55,52 +58,73 @@ public class Controller {
             error.setText("Username must contain only letters or numbers");
 
             usernameField.setStyle("-fx-background-color: red");
+            clean = false;
         }
         else {
-            error.setVisible(false);
-            usernameField.setStyle(null);
+            resetTextField(usernameField);
         }
+
 //first name check
         if(matcherFirstnameField.find()){
             error.setVisible(true);
             error.setText("First name must contain only letters");
             firstNameField.setStyle("-fx-background-color: red");
+            clean = false;
         }
         else {
-            error.setVisible(false);
-            firstNameField.setStyle(null);
+
+            resetTextField(firstNameField);
         }
+
 //last name check
         if(matcherLastnameField.find()) {
             error.setVisible(true);
             error.setText("Last name must contain only letters");
             lastNameField.setStyle("-fx-background-color: red");
+            clean = false;
         }
         else {
-            error.setVisible(false);
-            lastNameField.setStyle(null);
+
+            resetTextField(lastNameField);
         }
+
 //email adress check
         if(matcherEmailField.find()){
             error.setVisible(true);
             error.setText("That is not a valid email adress");
-           emailField.setStyle("-fx-background-color: red");
+            emailField.setStyle("-fx-background-color: red");
+            clean = false;
         }
         else {
-            error.setVisible(false);
-            emailField.setStyle(null);
+
+            resetTextField(emailField);
         }
+
 //phone number check
-        if(matcherPhoneNumberField.find() && (phoneNumberField.getText().length() < 5 || phoneNumberField.getText().length() > 15)){
+
+        if(phoneNumberField.getText().length() < 5 || phoneNumberField.getText().length() > 15 || matcherPhoneNumberField.find()) {
+
             error.setVisible(true);
             error.setText("That is not a valid phone number");
             phoneNumberField.setStyle("-fx-background-color: red");
+            clean = false;
         }
-        else {
-            error.setVisible(false);
-            phoneNumberField.setStyle(null);
-        }
+            else{
+                resetTextField(phoneNumberField);
+            }
+
+
+
+
     }
+
+    public void resetTextField(TextField tf){
+        if(clean == true)
+        error.setVisible(false);
+        tf.setStyle(null);
+
+    }
+
 
     public void checkPass() {
         Tooltip tooltip = new Tooltip();
@@ -121,14 +145,18 @@ public class Controller {
         }
     }
     public void register(){
-        if(error.isVisible() == false) {
+        if(clean == true) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes!");
             alert.setHeaderText(null);
             alert.setContentText("Account created, you can now log in.");
             alert.showAndWait();
         }else{
-
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR!");
+            alert.setHeaderText(null);
+            alert.setContentText("Please correct all the issues first");
+            alert.showAndWait();
         }
     }
 }
