@@ -109,9 +109,9 @@ public class Controller {
             phoneNumberField.setStyle("-fx-background-color: red");
             clean = false;
         }
-            else{
-                resetTextField(phoneNumberField);
-            }
+        else{
+            resetTextField(phoneNumberField);
+        }
 
 
 
@@ -120,28 +120,75 @@ public class Controller {
 
     public void resetTextField(TextField tf){
         if(clean == true)
-        error.setVisible(false);
+            error.setVisible(false);
         tf.setStyle(null);
 
     }
 
+    public void resetPasswordField(PasswordField pw , PasswordField confirmpw){
+        if(clean == true) {
+            error.setVisible(false);
+            pw.setStyle(null);
+            confirmpw.setStyle(null);
+        }
+    }
+
 
     public void checkPass() {
+        clean = true;
         Tooltip tooltip = new Tooltip();
         tooltip.setText("PASSWORDS DO NOT MATCH!");
         tooltip.activatedProperty();
 
-        if (!passwordField.getText().equals(confirmPasswordField.getText()) || !(confirmPasswordField.getText().equals(passwordField.getText()))) {
-            passwordField.setTooltip(tooltip);
-            confirmPasswordField.setTooltip(tooltip);
-            error.setVisible(true);
-            error.setText("Passwords do not match");
-            confirmPasswordField.setStyle("-fx-background-color: red");
-            passwordField.setStyle("-fx-background-color: red");
+        if (passwordField.getText().equals(confirmPasswordField.getText()) || (confirmPasswordField.getText().equals(passwordField.getText()))) {
+            Pattern onlyNumbers = Pattern.compile("[^0-9]");
+            Pattern capital = Pattern.compile("[^A-Z]");
+            Pattern special = Pattern.compile("[^a-z0-9 ]",Pattern.CASE_INSENSITIVE);
+
+            Matcher specialPasswordField = special.matcher(passwordField.getText());
+            Matcher numbersPasswordField = onlyNumbers.matcher(passwordField.getText());
+            Matcher capitalLetterPasswordField = capital.matcher(passwordField.getText());
+            if(!numbersPasswordField.find()) {
+                passwordField.setTooltip(tooltip);
+                confirmPasswordField.setTooltip(tooltip);
+                error.setVisible(true);
+                error.setText("Passwords must contain at least 1 number");
+                confirmPasswordField.setStyle("-fx-background-color: red");
+                passwordField.setStyle("-fx-background-color: red");
+                clean = false;
+            }
+            else if(!capitalLetterPasswordField.find()){
+
+                passwordField.setTooltip(tooltip);
+                confirmPasswordField.setTooltip(tooltip);
+                error.setVisible(true);
+                error.setText("Passwords must contain at least 1 capital letter");
+                confirmPasswordField.setStyle("-fx-background-color: red");
+                passwordField.setStyle("-fx-background-color: red");
+                clean = false;
+            }
+
+            else if(!capitalLetterPasswordField.find()){
+
+                passwordField.setTooltip(tooltip);
+                confirmPasswordField.setTooltip(tooltip);
+                error.setVisible(true);
+                error.setText("Passwords must contain at least 1 capital letter");
+                confirmPasswordField.setStyle("-fx-background-color: red");
+                passwordField.setStyle("-fx-background-color: red");
+                clean = false;
+            }
+            else if(!specialPasswordField.find()){
+                passwordField.setTooltip(tooltip);
+                confirmPasswordField.setTooltip(tooltip);
+                error.setVisible(true);
+                error.setText("Passwords must contain at least 1 special character");
+                confirmPasswordField.setStyle("-fx-background-color: red");
+                passwordField.setStyle("-fx-background-color: red");
+                clean = false;
+            }
         }else{
-            error.setVisible(false);
-            confirmPasswordField.setStyle(null);
-            passwordField.setStyle(null);
+            resetPasswordField(passwordField, confirmPasswordField);
         }
     }
     public void register(){
