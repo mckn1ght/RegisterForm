@@ -38,33 +38,33 @@ public class Controller {
     @FXML
     Button quitButton;
 
-    static boolean clean;
+    static boolean username, firstname, lastname, email, phonenumber, password, confirmpassword;
 
     public void checkUsernameField(){
 
         Pattern specialCharacters = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher matcherUsernameField = specialCharacters.matcher(usernameField.getText());
-        clean = true;
+        username = true;
 
         if (matcherUsernameField.find()) {
             error.setVisible(true);
             error.setText("Username must contain only letters or numbers");
             usernameField.setStyle("-fx-background-color: red");
-            clean = false;
+            username = false;
         } else {
             resetTextField(usernameField);
         }
     }
 
     public void checkFirstNameField(){
-        clean = true;
+        firstname = true;
         Pattern onlyLetters = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE);
         Matcher matcherFirstnameField= onlyLetters.matcher(firstNameField.getText());
         if(matcherFirstnameField.find()){
             error.setVisible(true);
             error.setText("First name must contain only letters");
             firstNameField.setStyle("-fx-background-color: red");
-            clean = false;
+            firstname = false;
         }
         else {
 
@@ -73,14 +73,14 @@ public class Controller {
     }
 
     public void checkLastNameField(){
-        clean = true;
+        lastname = true;
         Pattern onlyLetters = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE);
         Matcher matcherLastnameField = onlyLetters.matcher(lastNameField.getText());
         if(matcherLastnameField.find()) {
             error.setVisible(true);
             error.setText("Last name must contain only letters");
             lastNameField.setStyle("-fx-background-color: red");
-            clean = false;
+            lastname = false;
         }
         else {
 
@@ -89,15 +89,17 @@ public class Controller {
     }
 
     public void checkEmailAdressField(){
-        clean = true;
-        Pattern specialCharacters = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        email = true;
+        //Pattern specialCharacters = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+
+        Pattern specialCharacters = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", Pattern.CASE_INSENSITIVE);
         Matcher matcherEmailField = specialCharacters.matcher(emailField.getText());
-        if(matcherEmailField.find()){
+        if(!matcherEmailField.find()){
 
             error.setVisible(true);
             error.setText("That is not a valid email adress");
             emailField.setStyle("-fx-background-color: red");
-            clean = false;
+            email = false;
         }
         else {
 
@@ -106,14 +108,14 @@ public class Controller {
     }
 
     public void checkPhoneNumberField(){
-        clean = true;
+        phonenumber = true;
         Pattern onlyNumbers = Pattern.compile("[^0-9]");
         Matcher matcherPhoneNumberField = onlyNumbers.matcher(phoneNumberField.getText());
         if((phoneNumberField.getText().length() < 5 && phoneNumberField.getText().length() > 0) || phoneNumberField.getText().length() > 15 || matcherPhoneNumberField.find()) {
             error.setVisible(true);
             error.setText("That is not a valid phone number");
             phoneNumberField.setStyle("-fx-background-color: red");
-            clean = false;
+            phonenumber = false;
         }
         else{
             resetTextField(phoneNumberField);
@@ -122,7 +124,7 @@ public class Controller {
 
     public void checkPasswordField() {
         String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
-        clean = true;
+        password = true;
         char currentCharacter;
         boolean numberPresent = false;
         boolean upperCasePresent = false;
@@ -140,34 +142,34 @@ public class Controller {
         }
 
         if((passwordField.getText().length() > 0 && passwordField.getText().length() < 8) || passwordField.getText().length() > 20){
-            clean = false;
+            password = false;
             error.setVisible(true);
             error.setText("Password must be between 8 and 20 characters long");
             passwordField.setStyle("-fx-background-color: red");
         }
         if(!numberPresent){
-            clean =false;
+            password =false;
             error.setVisible(true);
             error.setText("Password must contain at least 1 number");
             passwordField.setStyle("-fx-background-color: red");
             return;
         }
         if(!upperCasePresent){
-            clean =false;
+            password =false;
             error.setVisible(true);
             error.setText("Password must contain at least 1 Upper case");
             passwordField.setStyle("-fx-background-color: red");
             return;
         }
         if(!specialCharacterPresent) {
-            clean =false;
+            password =false;
             error.setVisible(true);
             error.setText("Password must contain at least 1 special character");
             passwordField.setStyle("-fx-background-color: red");
             return;
         }
         if(!confirmPasswordField.getText().equals(passwordField.getText())){
-            clean = false;
+            password = false;
             error.setVisible(true);
             error.setText("Passwords do not match");
             confirmPasswordField.setStyle("-fx-background-color: red");
@@ -175,16 +177,16 @@ public class Controller {
             resetPasswordField(passwordField, confirmPasswordField);
         }
 
-        if(clean){
+        if(password){
 
             resetPasswordField(passwordField);
         }
     }
 
     public void checkConfirmPasswordField(){
-        clean = true;
+        confirmpassword = true;
         if(!confirmPasswordField.getText().equals(passwordField.getText())){
-            clean = false;
+            confirmpassword = false;
             error.setVisible(true);
             error.setText("Passwords do not match");
             confirmPasswordField.setStyle("-fx-background-color: red");
@@ -195,8 +197,14 @@ public class Controller {
         }
     }
 
-    public void register(){
-        if(clean) {
+    public void register() {
+        if (usernameField.getText().isEmpty() || firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || emailField.getText().isEmpty() || phoneNumberField.getText().isEmpty() ||
+                passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()){
+
+            error.setVisible(true);
+            error.setText("You must complete all the fields first");
+    }
+        if(username && firstname && lastname && email && phonenumber && password && confirmpassword) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succes!");
             alert.setHeaderText(null);
@@ -212,7 +220,7 @@ public class Controller {
     }
 
     public void resetTextField(TextField tf){
-        if(clean) {
+        if(username || firstname || lastname || email || phonenumber || password || confirmpassword) {
             error.setVisible(false);
             tf.setStyle(null);
         }
@@ -220,7 +228,7 @@ public class Controller {
     }
 
     public void resetPasswordField(PasswordField pw , PasswordField confirmpw){
-        if(clean) {
+        if(username || firstname || lastname || email || phonenumber || password || confirmpassword) {
             error.setVisible(false);
             pw.setStyle(null);
             confirmpw.setStyle(null);
@@ -228,7 +236,7 @@ public class Controller {
     }
 
     public void resetPasswordField(PasswordField pw){
-        if(clean) {
+        if(username || firstname || lastname || email || phonenumber || password || confirmpassword) {
             error.setVisible(false);
             pw.setStyle(null);
         }

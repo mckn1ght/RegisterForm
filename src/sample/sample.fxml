@@ -1,26 +1,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="sample.Controller" alignment="TOP_CENTER" hgap="15" vgap="15" >
+          fx:controller="sample.Controller"  alignment="TOP_CENTER" hgap="15" vgap="15" >
 
-    <Label text = "Username: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0" onKeyReleased="#checkUsernameField" />
-    <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyReleased="#checkFirstNameField" />
-    <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" onKeyReleased="#checkLastNameField" />
-    <Label text="Email Adress" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" onKeyReleased="#checkEmailAdressField" />
-    <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="4" onKeyReleased="#checkPhoneNumberField" />
-    <Label text = "Password: " GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5" onKeyReleased="#checkPasswordField"/>
-    <Label text = "Confirm Password" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="6"  onKeyReleased="#checkConfirmPasswordField"/>
+    <Label text="Registration Form"  alignment="TOP_CENTER" style="-fx-font: 24 arial; -fx-font-weight: bold;" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
-    <Label fx:id="error" textFill="red" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="7" wrapText="true" GridPane.columnSpan="2"/>
+    <Label text = "Username: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyReleased="#checkUsernameField" />
+    <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" onKeyReleased="#checkFirstNameField" />
+    <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="3" onKeyReleased="#checkLastNameField" />
+    <Label text="Email Adress" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="4" onKeyReleased="#checkEmailAdressField" />
+    <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="5" onKeyReleased="#checkPhoneNumberField" />
+    <Label text = "Password: " GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="6" onKeyReleased="#checkPasswordField"/>
+    <Label text = "Confirm Password" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="7"  onKeyReleased="#checkConfirmPasswordField"/>
 
-    <HBox GridPane.rowIndex="8" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2" >
+    <Label fx:id="error" textFill="red" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="8" wrapText="true" GridPane.columnSpan="2"/>
+
+    <HBox GridPane.rowIndex="9" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2" >
         <Button fx:id="okButton" text="Register" onAction="#register" prefWidth="90" />
         <Button fx:id="quitButton" text="Quit" prefWidth="90"/>
     </HBox>
