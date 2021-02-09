@@ -2,14 +2,15 @@
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.Controller"  alignment="TOP_CENTER" hgap="15" vgap="15" >
+
     <Label text="Registration Form"  alignment="TOP_CENTER" style="-fx-font: 24 arial; -fx-font-weight: bold;" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
-    <Label text = "Username: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Label text = "Username: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyReleased="#checkUsernameField" />
     <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" onKeyReleased="#checkFirstNameField" />
+    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" onKeyReleased="#checkFirstNameField" style="text-transform:uppercase" />
     <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="3" onKeyReleased="#checkLastNameField" />
+    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="3" onKeyReleased="#checkLastNameField" style="text-transform:uppercase"/>
     <Label text="Email Adress" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="4" onKeyReleased="#checkEmailAdressField" />
     <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
@@ -23,6 +24,6 @@
 
     <HBox GridPane.rowIndex="9" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2" >
         <Button fx:id="okButton" text="Register" onAction="#register" prefWidth="90" />
-        <Button fx:id="quitButton" text="Quit" prefWidth="90"/>
+        <Button fx:id="quitButton" text="Quit" prefWidth="90" onAction="#quit"/>
     </HBox>
 </GridPane>
